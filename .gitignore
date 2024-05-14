@@ -1,0 +1,28 @@
+.DS_Store
+node_modules
+/build
+/dist
+/.vs
+# local env files
+.env.local
+.env.*.local
+# local config.json file
+/public/config.json
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+/tests
+.env
+.vs
+.Rproj.user
+AAS_Main_FE.Rproj

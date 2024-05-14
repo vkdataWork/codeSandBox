@@ -1,0 +1,135 @@
+{"list":[
+    {
+        "id": 276,
+        "name": "Mapy",
+        "description": "Demo ukázky práce s mapami v dashboardech",
+        "environmentId": 1,
+        "owner": "vaclavklimesambicacz"
+    },
+    {
+        "id": 278,
+        "name": "aas",
+        "description": "Adaptivní systém detekce anomálií",
+        "environmentId": 1,
+        "owner": "vaclavklimesambicacz"
+    },
+    {
+        "id": 280,
+        "name": "DWHstage",
+        "description": "Sdílené datové zdroje pro projekty",
+        "environmentId": 1,
+        "owner": "vaclavklimesambicacz"
+    },
+    {
+        "id": 282,
+        "name": "bsc",
+        "description": "Test bsc struktury v AmbicaBI",
+        "environmentId": 1,
+        "owner": "vaclavklimesambicacz"
+    },
+    {
+        "id": 300,
+        "name": "VPN-test",
+        "description": "Testování VPN připojení",
+        "environmentId": 1,
+        "owner": "vaclavklimesambicacz"
+    },
+    {
+        "id": 274,
+        "name": "AdventureWorks Lite",
+        "description": "Import Adventure Works Lite z MSSQL databáze a ukázky dashboardů",
+        "environmentId": 1,
+        "owner": "vaclavklimesambicacz"
+    },
+    {
+        "id": 302,
+        "name": "Financial Analysis",
+        "description": "",
+        "environmentId": 1,
+        "owner": "vaclavklimesambicacz"
+    },
+    {
+        "id": 309,
+        "name": "Northwind",
+        "description": "Northwind demo data",
+        "environmentId": 1,
+        "owner": "vaclavklimesambicacz"
+    },
+    {
+        "id": 310,
+        "name": "CSV_etl",
+        "description": "Projekt pro testy csv variant datových konektorů",
+        "environmentId": 1,
+        "owner": "vaclavklimesambicacz"
+    },
+    {
+        "id": 292,
+        "name": "public",
+        "description": "standard public schema",
+        "environmentId": 1,
+        "owner": "vaclavklimesambicacz"
+    },
+    {
+        "id": 297,
+        "name": "Geocoding",
+        "description": "Geocoding",
+        "environmentId": 1,
+        "owner": "vaclavklimesambicacz"
+    },
+    {
+        "id": 303,
+        "name": "Reporting",
+        "description": "",
+        "environmentId": 1,
+        "owner": "vaclavklimesambicacz"
+    },
+    {
+        "id": 289,
+        "name": "churn",
+        "description": "churn",
+        "environmentId": 1,
+        "owner": "vaclavklimesambicacz"
+    },
+    {
+        "id": 311,
+        "name": "test3",
+        "description": "test3",
+        "environmentId": 1,
+        "owner": "vaclavklimesambicacz"
+    },
+    {
+        "id": 312,
+        "name": "test2",
+        "description": "test2",
+        "environmentId": 1,
+        "owner": "vaclavklimesambicacz"
+    },
+    {
+        "id": 313,
+        "name": "test",
+        "description": "test",
+        "environmentId": 1,
+        "owner": "vaclavklimesambicacz"
+    },
+    {
+        "id": 314,
+        "name": "Test",
+        "description": "Test",
+        "environmentId": 1,
+        "owner": "vaclavklimesambicacz"
+    },
+    {
+        "id": 315,
+        "name": "SS",
+        "description": "SS",
+        "environmentId": 1,
+        "owner": "vaclavklimesambicacz"
+    },
+    {
+        "id": 272,
+        "name": "rfm",
+        "description": "rfm",
+        "environmentId": 1,
+        "owner": "vaclavklimesambicacz"
+    }
+]}
