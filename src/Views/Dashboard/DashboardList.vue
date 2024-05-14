@@ -1,6 +1,6 @@
 <template>
 	<div class="scroll-wrapper">
-		
+
 		<div :key="count" v-if="dashboards">
 			<DxDataGrid ref="dataGrid" class="responsive-paddings" :data-source="dashboards" key-expr="id"
 				:show-borders="true" :show-row-lines="true" :show-column-lines="true" :allow-column-reordering="true"
@@ -18,8 +18,7 @@
 						recursive: true,
 						selectByClick: true,
 					},
-				}" :column-auto-width="true" :allow-sorting="true" :focused-row-enabled="true" :word-wrap-enabled="true"
-				>
+				}" :column-auto-width="true" :allow-sorting="true" :focused-row-enabled="true" :word-wrap-enabled="true">
 				<DxToolbar :visible="true">
 					<DxItem :location="'after'" :locate-in-menu="'auto'">
 					</DxItem>
@@ -142,8 +141,8 @@ async function init(): Promise<void> {
 		.catch((error: any) => {
 			notify(t('Dashboards.NotLoaded'), 'error', 6000);
 			console.log('error while doshboards dispatching', error);
-		});	
-//	count.value++;
+		});
+	count.value++;
 	getDataGrid()?.endUpdate();
 }
 
@@ -156,11 +155,12 @@ function getDataGrid(): dxDataGrid | undefined {
 
 onMounted(() => {
 	init();
+	console.log("dashboards2", dashboards.value);
 });
 
 function view(e: any) {
 	router.push({
-		name: RouteNames.DashboardDetail,		
+		name: RouteNames.DashboardDetail,
 		params: {
 			id: e.row.key.toString(),
 			mode: 'viewer',
@@ -171,7 +171,7 @@ function view(e: any) {
 function getUrlView(e: any): string {
 	const url = router.resolve({
 		name: RouteNames.DashboardDetail,
-		
+
 		params: {
 			id: e.row.key.toString(),
 			mode: 'viewer',

@@ -107,6 +107,7 @@ export default class BaseModule<TKey, TList extends IEntity<TKey>, T extends Bas
 
 			setAll(state: BaseStateType<TList, T>, items: TList[]): void {
 				state.items.splice(0, state.items.length);
+				console.log("dashboards",items)
 				//   state.items = items;
 				state.items.push(...items);
 			},
