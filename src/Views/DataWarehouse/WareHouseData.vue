@@ -1,23 +1,13 @@
 <template>
   <div class="scroll-wrapper">
-    <div v-if="allowEdit !== null && isDashboardItem != true" :key="count">
-      <action-bar :menuItems="actionBarMenu" @actionBarEvent="handleActionBarEvent" :pageTitle="pageTitle"
-        :pageComments="pageComments" @twoRows="isTwoRows" />
-    </div>
     <div v-if="columns && columnsType.length > 0" :key="count">
       <DxDataGrid ref="dataGrid" :key="render" class="datagrid responsive-paddings" :data-source="storeDataGrid"
         :columns="columns" :show-borders="true" :show-row-lines="true" :show-column-lines="true"
         :allow-column-reordering="true" :allow-column-resizing="true" :allow-adding="isDashboardItem"
         :error-row-enabled="false" :allow-hiding="true" :column-auto-width="true" :allow-sorting="true"
         :focused-row-enabled="true" :remote-operations="{ groupPaging: true }" :word-wrap-enabled="true"
-        :onEditorPreparing="onEditorPreparing" :onSaving="onSaving" :onEditingStart="(e: any) => onEditingStart(e)"
-        :onContentReady="onContentReady">
-        <DxToolbar :visible="isDashboardItem">
-          <DxItem :location="'before'" :locate-in-menu="'auto'">
-            <ToolbarDatagrid :menuItems="toolbarMenu" @actionBarEvent="handleActionBarEvent" />
-          </DxItem>
-          <DxItem name="searchPanel" :location="'after'" :locate-in-menu="'auto'" />
-        </DxToolbar>
+        :onEditorPreparing="onEditorPreparing" :onSaving="onSaving" :onEditingStart="(e: any) => onEditingStart(e)">
+        
         <DxLoadPanel :enabled="false" />
         <DxColumn v-for="(column, index) in columns" :key="index" :data-field="column" :caption="column"
           :customizeText="(e: any) => customizeText(e, column) || ''"
@@ -60,11 +50,7 @@
           <interval-box :values="data" @update:interval="(e: any, value: any) => onIntervalChanged(e, value)" />
         </template>
         <template #bytea="{ data }">
-          <DxFileUploader select-button-text="Select file" name="file" label-text="" accept="image/*"
-            :upload-url="apiUrl" :uploadHeaders="uploadHeader" :upload-mode="'useButtons'"
-            @value-changed="(e: any) => onValueUploadChanged(e)" @upload-started="(e: any) => onUploadStarted(e, data)"
-            @upload-error="(e: any) => onUploadError(e)" @upload-succeeded="(e: any) => onUploadSucceeded(e)"
-            @uploaded="(e: any) => onUploaded(e, data)" />
+
           <div v-if="data.value">
             <div style="display: flex; flex-direction: row" v-if="!hideImage">
               <img v-if="data.value" :src="getImage(data.value)" alt="No image" style="width: 30%; height: 30%" />
@@ -128,13 +114,9 @@
 </template>
 
 <script setup lang="ts">
-import ActionBar from '@/Views/Commons/ActionBar.vue';
-import { ActionBarMenuType } from '@/Types/ActionBarMenuType';
 import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
-import { RouteNames } from '@/Plugins/Router/RouteNames';
 import { ref, computed, onMounted, watch } from 'vue';
-import { DxFileUploader } from 'devextreme-vue/file-uploader';
 import IntervalBox from '@/Views/Commons/IntervalBox.vue';
 import {
   DxDataGrid,
@@ -145,26 +127,16 @@ import {
   DxLoadPanel,
   DxFilterPanel,
   DxEditing,
-  DxForm,
-  DxItem,
-  DxToolbar,
-  DxToolbarItem,
-  DxPatternRule,
   DxAsyncRule,
   DxFilterBuilderPopup,
   DxItem as DxItemGrid,
   DxHeaderFilter,
-  DxGroupItem,
   DxFilterRow,
   DxSorting,
   DxScrolling,
-  DxButton,
 } from 'devextreme-vue/data-grid';
-import DxPopup, { DxToolbarItem as DxPopupToolbarItem } from 'devextreme-vue/popup';
-// import { DxForm, DxItem, DxPatternRule,DxCustomRule } from 'devextreme-vue/form';
 import { useI18n } from 'vue-i18n';
 import { TableData } from '@/Types/Warehouse/TableData';
-import { User } from 'oidc-client';
 import CustomStore from 'devextreme/data/custom_store';
 import { createStore } from 'devextreme-aspnet-data-nojquery';
 import dxDataGrid from 'devextreme/ui/data_grid';
@@ -174,21 +146,13 @@ import moment, { Duration } from 'moment';
 import DialogFactory from '@/Classes/DialogueFactory';
 import CidrBox from '@/Views/Commons/CidrBox.vue';
 import MacAddressBox from '@/Views/Commons/MacAddressBox.vue';
-import ToolbarDatagrid from '@/Views/Commons/ToolbarDatagrid.vue';
 import dxForm from 'devextreme/ui/form';
-import { dashboardItem } from 'devexpress-dashboard/model/index.metadata';
-import { uuid } from '@/Utils/Utils';
 import ZoneTimeBox from '@/Views/Commons/ZoneTimeBox.vue';
-import { AnyCnameRecord } from 'dns';
 
 const isDashboardItem = computed(() => {
   return route.path.includes('tableDataItem');
 });
 let byteaUploaded = ref();
-const toolbarMenu = ref({
-  create: true,
-});
-const isSaveDisabled = ref(true);
 let imageName = ref('');
 let image = computed(() => getImage(byteaUploaded.value).toString());
 let rowIndexUploadedPhoto = ref();
@@ -198,30 +162,15 @@ const { t } = useI18n();
 let popupVisible = ref(false);
 const form = ref(null);
 let isCreate = ref(true);
-let apiUrl = computed(() => {
-  let ipAddress = store.getters['AccountModule/urlWarehouseAPI'];
-  let api = store.getters['DataSourcesModule/apiPath'];
-  return `${ipAddress}/${api}/image`;
-});
-let uploadHeader = computed(() => {
-  return {
-    Content: 'encoded_image.bin',
-    Authorization: `Bearer ${(store.getters['AccountModule/user']() as User).access_token}`,
-  };
-});
 let count = ref(0 as number);
 let valuesToAdd = ref({} as any);
-let width = ref(window.innerWidth - 40 || 600);
-let height = ref(window.innerHeight - 40 || 600);
 const route = useRoute();
 const store = useStore();
-const router = useRouter();
 const dateFormat = 'DD.MM.yyyy';
 const dateTimeFormat = 'DD.MM.yyyy HH:mm:ss';
 const dateTimeWithZoneFormat = 'DD.MM.yyyy HH:mm:ssx';
 const timeFormat = 'HH:mm:ss';
 const timeWithZoneFormat = 'HH:mm:ssx';
-const intervalFormat = 'yy mm dd HH:mm:ss';
 const momentDateFormat = 'DD.MM.yyyy';
 const momentDateTimeFormat = 'DD.MM.yyyy HH:mm:ss';
 const momentDateTimeWithZoneFormat = 'DD.MM.yyyy HH:mm:ss Z';
@@ -231,22 +180,6 @@ const momentIntervalFormat = 'HH:mm:ss';
 const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 let render = ref(0);
 let allowEdit = ref<boolean>(false);
-let actionBarMenu = {
-  back: true,
-  save: false,
-  create: true,
-  createDisabled: isDashboardItem.value ? false : !allowEdit.value,
-  project: false,
-  search: false,
-  getState: false,
-  setState: false,
-  removeState: false,
-  initialState: false,
-  switch: false,
-  codeEditor: false,
-  upload: false,
-} as ActionBarMenuType;
-let actionBarVisible = ref<boolean>(!isDashboardItem.value);
 let columns = ref<string[] | null>();
 let keys = ref<Array<any>>([
   {
@@ -255,20 +188,8 @@ let keys = ref<Array<any>>([
   },
 ]);
 let tabledata = ref<TableData[] | null>();
-let selectedUser = computed<User>(() => store.getters['AccountModule/user']());
 let dataGrid = ref(null);
-let actionBarTwoRows = ref(false);
 let columnsType = ref([] as any[]);
-let pageTitle = ref(`Table data : ${route.params.scheme}.${route.params.table}`);
-let pageComments = ref('');
-const isNotEmpty = (value: any) => value !== undefined && value !== null && value !== '';
-
-function handleErrors(response: any) {
-  if (!response.ok) {
-    throw Error(response.statusText);
-  }
-  return response;
-}
 
 function isCustomColumn(column: any): boolean {
   let result = columnsType.value.find((x: any) => x.name == column).type == 'cidr' ? 'cidr' : columnsType.value.find((x: any) => x.name == column).type == 'inet' ? 'inet' : columnsType.value.find((x: any) => x.name == column).type == 'macaddr' ? 'macaddress' : columnsType.value.find((x: any) => x.name == column).type == 'bytea' ? 'bytea' : columnsType.value.find((x: any) => x.name == column).type == 'interval' ? 'interval' : columnsType.value.find((x: any) => x.name == column).format.type == 'time' ? 'time' : columnsType.value.find((x: any) => x.name == column).format.type == 'timetz' ? 'timetz' : undefined;
@@ -277,12 +198,6 @@ function isCustomColumn(column: any): boolean {
 let dataSource = computed((): CustomStore<TableData[], any> => {
   return createStore({
     loadUrl: `${store.getters['AccountModule/urlWarehouseAPI']}/warehouse/tabledata`,
-    async onLoaded(result) {
-      console.log("result", JSON.parse(JSON.stringify(result)));
-      result = replaceDotString(result);
-    },
-    async onLoading(loadOptions) {
-    },
 
     async onInserting(values) {
       for (const key in valuesToAdd.value) {
@@ -291,7 +206,6 @@ let dataSource = computed((): CustomStore<TableData[], any> => {
       valuesToAdd.value = {};
       values.table = route.params.table;
       values.scheme = route.params.scheme;
-      values = replaceStringDot(values);
       store
         .dispatch('WarehouseModule/createData', values)
         .then(() => {
@@ -327,7 +241,6 @@ let dataSource = computed((): CustomStore<TableData[], any> => {
       }
       updateData.table = route.params.table;
       updateData.scheme = route.params.scheme;
-      updateData = replaceStringDot(updateData);
       await store
         .dispatch('WarehouseModule/updateData', updateData)
         .then(() => {
@@ -345,7 +258,6 @@ let dataSource = computed((): CustomStore<TableData[], any> => {
     onRemoving(key) {
       key.table = route.params.table;
       key.scheme = route.params.scheme;
-      key = replaceStringDot(key);
       store
         .dispatch('WarehouseModule/deleteData', key)
         .then(() => {
@@ -362,10 +274,8 @@ let dataSource = computed((): CustomStore<TableData[], any> => {
 
     onBeforeSend: (method, ajaxOptions) => {
       ajaxOptions.headers = {
-        Environment: store.getters['AccountModule/environment'](),
         Table: encodeURI(route.params.table as string),
-        Scheme: encodeURI(route.params.scheme as string),
-        Authorization: 'Bearer ' + selectedUser.value?.access_token,
+        Scheme: encodeURI(route.params.scheme as string)
       };
     },
   });
@@ -375,8 +285,7 @@ let storeDataGrid = new CustomStore<TableData[], any>({
   //  loadMode: "raw",
   load: function (loadOptions) {
     let options = loadOptions;
-    options = replaceStringDot(options);
-    return replaceDotString(dataSource.value.load(options));
+    return dataSource.value.load(options);
   },
 
   insert: (values) => {
@@ -398,18 +307,12 @@ const filterBuilderPopupPosition = {
 };
 
 onMounted(async () => {
-  store.commit('StatusModule/setIsLoading', true);
   await init();
 });
 
 function getDataGrid(): dxDataGrid | undefined {
   if (dataGrid.value === null || dataGrid.value === undefined) return undefined;
   return (dataGrid.value as DxDataGrid)?.instance;
-}
-
-function getForm(): dxForm | undefined {
-  if (form.value === null || form.value === undefined) return undefined;
-  return (form.value as any)?.instance;
 }
 
 function getType(e: any): void {
@@ -594,7 +497,6 @@ function getType(e: any): void {
 }
 
 async function init() {
-  store.commit('StatusModule/setIsLoading', true);
   getDataGrid()?.beginUpdate();
   await store
     .dispatch('WarehouseModule/loadKeys', {
@@ -602,70 +504,41 @@ async function init() {
       scheme: route.params.scheme,
     })
     .then(() => {
-      actionBarVisible.value = false;
       keys.value = store.getters['WarehouseModule/keysColumn'];
       allowEdit.value = keys.value.length > 0 ? true : false;
       allowEdit.value == true ? render.value++ : DialogFactory.CreateAlertDialogue(t('DataWareHouse.EditDisabled')).show();
-      allowEdit.value == true
-        ? (pageTitle = ref(`${route.params.scheme}.${route.params.table} - Table data`))
-        : (pageComments = ref(`${t('DataWareHouse.EditDisabled')}`));
-      keys.value = Array.from(new Set(keys.value));
-      actionBarMenu = {
-        back: true,
-        save: false,
-        create: true,
-        createDisabled: !allowEdit.value,
-        project: false,
-        search: false,
-        getState: false,
-        setState: false,
-        removeState: false,
-        initialState: false,
-        switch: false,
-        codeEditor: false,
-        upload: false,
-      };
-    })
-    .catch((error) => {
-      console.log(error);
-      notify(`${t('DataWareHouse.DataNotAllowed')} - ${error.response.data ?? error.response.statusText}`, 'error', 6000);
-      pageComments.value = `${t('DataWareHouse.DataNotAllowed')} - ${error.response.data ?? error.response.statusText}`;
-    });
+      keys.value = Array.from(new Set(keys.value));})
+    .catch ((error) => {
+        console.log(error);
+        notify(`${t('DataWareHouse.DataNotAllowed')} - ${error.response.data ?? error.response.statusText}`, 'error', 6000);
+      });
   await store
     .dispatch('WarehouseModule/nameload', {
       name: route.params.table,
       scheme: route.params.scheme,
     })
     .then(() => {
-      columns.value = replaceDotString(store.getters['WarehouseModule/columnsname']);
+      columns.value = store.getters['WarehouseModule/columnsname'];
     })
     .then(() => {
-      tabledata.value = replaceDotString(store.getters['WarehouseModule/data']);
+      tabledata.value = store.getters['WarehouseModule/data'];
     })
     .catch((error) => {
       console.log(error);
       notify(`${t('DataWareHouse.DataNotAllowed')}- ${error.response.data ?? error.response.statusText}`, 'warning', 6000);
-      pageComments.value = `${t('DataWareHouse.DataNotAllowed')} - ${error.response.data ?? error.response.statusText}`;
-      //backToList();
     });
   await store
     .dispatch('WarehouseModule/columnsload', {
       name: route.params.table,
       scheme: route.params.scheme,
     })
-    .then(() => getType(replaceDotString(JSON.parse(JSON.stringify(store.getters['WarehouseModule/columns'])))))
+    .then(() => getType(store.getters['WarehouseModule/columns']))
     .catch((error) => {
       console.log(error);
       notify(`${t('DataWareHouse.DataNotAllowed')} ${error.response.data ?? error.response.statusText}`, 'warning', 6000);
-      pageComments.value = `${t('DataWareHouse.DataNotAllowed')} - ${error.response.data ?? error.response.statusText}`;
-      //backToList();
     });
-
-  store.commit('StatusModule/setIsLoading', false);
   getDataGrid()?.endUpdate();
   getDataGrid()?.refresh();
-  let datagrid = document.querySelector('.dx-datagrid')!.parentNode as HTMLElement;
-  actionBarTwoRows.value == true ? datagrid.classList.add('datagrid') : datagrid.classList.add('datagridOneRow');
 }
 
 function onEditorPreparing(e: any) {
@@ -680,15 +553,6 @@ function onEditorPreparing(e: any) {
       e.dataType = x.typeJS;
     }
   });
-}
-function handleActionBarEvent(e: any) {
-  if (e.itemData.nameId === 'back') {
-    backToList();
-  }
-  if (e.itemData.nameId === 'create') {
-    isCreate.value = true;
-    getDataGrid()?.addRow();
-  }
 }
 
 function onSaving(e: any): void {
@@ -727,20 +591,6 @@ function onMacAddressChanged(caption: any, values: any) {
 
 function onIntervalChanged(caption: any, values: any) {
   valuesToAdd.value[caption] = values;
-}
-
-async function backToList(): Promise<void> {
-  await router.push({
-    name: RouteNames.DataWarehouse,
-    query: {
-      env: store.getters['AccountModule/environment'](),
-      prj: store.getters['AccountModule/projectIds'](),
-    },
-  });
-}
-
-function isTwoRows(e: any) {
-  actionBarTwoRows.value = e;
 }
 
 function customizeText(e: any, column: any): any {
@@ -845,24 +695,11 @@ function getStringValue(value: any): string {
     result = value.value as string;
   } else if (value != undefined && value.text != '') {
     const column = value.column.dataField; ''
-    result = value.key[replaceStringDot(column)];
+    result = value.key[column];
   } else if (value != undefined && value.valueText != '') {
     result = value.valueText as string;
   }
   return result;
-}
-
-function onContentReady() {
-  setTimeout(() => {
-    store.commit('StatusModule/setIsLoading', false);
-  }, 1000);
-  const datagrid = document.querySelector('.dx-datagrid')!.parentNode as HTMLElement;
-  // actionBarTwoRows.value == true ? datagrid?.classList.add('datagrid') : datagrid?.classList.add('datagridOneRow');
-  if (isDashboardItem.value == true) {
-    datagrid.classList.remove('datagridOneRow');
-    datagrid.classList.add('dashboardCustomItem');
-  }
-  getForm()?.repaint();
 }
 
 function onEditingStart(e: any) {
@@ -872,27 +709,9 @@ function onEditingStart(e: any) {
   isValid.value = true;
 }
 
-function onUploaded(e: any, data: any) {
-  byteaUploaded.value = JSON.parse(e.request.response).data;
-  valuesToAdd.value[data.item.dataField] = e.request.response;
-  imageName.value = e.file.name;
-  hideImage.value = true;
-  rowIndexUploadedPhoto.value = data.column.dataField;
-}
-
 function getImage(file: any): any {
   return `data:image/png;base64,${file}`;
 }
-
-function onUploadError(e: any) {
-  notify(e.request.responseText, 'error', 4000);
-}
-
-function onUploadSucceeded(e: any) { }
-
-function onUploadStarted(e: any, data: any) { }
-
-function onValueUploadChanged(e: any) { }
 
 function deleteImage(data: any) {
   valuesToAdd.value[data.item.dataField] = null;
@@ -912,7 +731,7 @@ async function checkValue(datatype: any, value: any): Promise<any> {
     case 'integer':
       if (value == null || value == '') return true;
       try {
-        return Number.isInteger(value) || BigInt(value)? true : false;
+        return Number.isInteger(value) || BigInt(value) ? true : false;
       } catch (e) {
         return false;
       };
@@ -1031,77 +850,6 @@ async function checkValue(datatype: any, value: any): Promise<any> {
   }
 }
 
-
-function dataTypeFn(data: any): any {
-
-  if (Array.isArray(data)) {
-    return 'array';
-  }
-  else if (typeof data == 'object') {
-    return 'object';
-  } else if (typeof data === 'string') {
-    return 'string';
-  } else {
-    return 'unknown';
-  }
-}
-
-const exceptions = ['name', 'selector', 'filter'];
-
-function replaceDotString(data: any): any {
-  if (data == null || data == undefined) return;
-  const dataType = dataTypeFn(data);
-  if (dataType == 'array') {
-    return data.map((x: any) => replaceDotString(x));
-  } else {
-    return dotToString(data);
-  }
-}
-
-function dotToString(data: any): any {
-  if (data == null || data == undefined) return;
-  if (typeof data !== 'object' || data === null) {
-    return JSON.parse(JSON.stringify(data.replace(/\./g, '_dot_')));
-  }
-  let newData = {};
-  Object.keys(data).forEach((key: any) => {
-    if (Array.isArray(data[key])) {
-      newData[key] = data[key].map((item: any) => dotToString(item));
-    } else {
-      const newKey = key.replace(/\./g, '_dot_');
-      if (data[key] != null && data[key] != undefined) newData[newKey] = exceptions.find((x: any) => x == key) ? data[key].replace(/\./g, '_dot_') : data[key];
-    }
-  });
-  return newData;
-}
-
-function replaceStringDot(data: any): any {
-  if (data == null || data == undefined) return;
-  const dataType = dataTypeFn(data);
-  if (dataType == 'array') {
-    return data.map((x: any) => replaceStringDot(x));
-  } else {
-    return stringToDot(data);
-  }
-}
-
-function stringToDot(data: any): any {
-  if (data == null || data == undefined) return;
-  if (typeof data !== 'object' || data === null) {
-    return JSON.parse(JSON.stringify(data.replace(/_dot_/g, '.')));
-  }
-  let newData = {};
-  Object.keys(data).forEach((key: any) => {
-    if (Array.isArray(data[key])) {
-      newData[key] = data[key].map((item: any) => stringToDot(item));
-    } else {
-      const newKey = key.replace(/_dot_/g, '.');
-      const newValue = data[key] && data[key] != null && data[key] != undefined && typeof data[key] == 'string' ? data[key].replace(/_dot_/g, '.') : data[key];
-      newData[newKey] = newValue;
-    }
-  });
-  return newData;
-}
 </script>
 
 <style scoped>

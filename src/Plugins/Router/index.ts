@@ -16,7 +16,7 @@ async function beforeEnter(to: RouteLocationNormalized, from: RouteLocationNorma
 	if (canLoad) {
 		next();
 	} else {
-		next(Routes.find((x) => <string>x.name === 'RoutesNames.DashboardList'));
+		next(Routes.find((x) => <string>x.name === 'RoutesNames.Default'));
 	};
 }
 

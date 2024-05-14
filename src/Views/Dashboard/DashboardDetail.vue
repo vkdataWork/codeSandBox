@@ -268,7 +268,6 @@ function registerExtension(e: any) {
 
 async function onBeforeRender(e: any) {
     dashboardControl.value = e.component;
-    console.log("on Before", e);
     dashboardControl.value.remoteService.headers = {};
     currentEnvironment.value = 1;
     registerExtension(e);
@@ -278,9 +277,6 @@ const apiUrl = ref<string>(`${store.getters["AccountModule/urlWarehouseAPI"]}/ap
 const apiStateUrl = ref<string>(`${store.getters["AccountModule/urlWarehouseAPI"]}/dashboards`);
 
 function handleActionBarEvent(e: any) {
-    if (e.itemData.nameId === "back") {
-        backToList();
-    }
     if (e.itemData.nameId === "view") {
         actionBarMenu.view = !actionBarMenu.view;
         actionBarMenu.edit = !actionBarMenu.edit;
@@ -315,17 +311,6 @@ function onClick() {
         removeState: workingModeProp.value != "Designer" ? true : false,
         initialState: workingModeProp.value != "Designer" ? true : false,
     };
-}
-
-function backToList() {
-    var undoExtension = dashboardControl.value.findExtension("undoRedo");
-
-    if (!undoExtension.isChanged()) {
-        router.push({
-            name: RouteNames.DashboardList,
-        });
-    } else {
-    }
 }
 </script>
 
