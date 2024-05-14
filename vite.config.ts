@@ -5,9 +5,6 @@ import sass from 'sass';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	optimizeDeps: {
-		include: ['codemirror'],
-	},
 	server: {
 		port: 8080,
 		cors: false,
