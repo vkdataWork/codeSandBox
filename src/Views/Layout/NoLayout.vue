@@ -1,5 +1,5 @@
 <template>
-    <div class="dx-theme-background-color" style="height: 98dvh">
+    <div class="dx-theme-background-color" style="height: 99dvh">
         <dx-drawer class="content-grid" position="before" style="height: 98dvh">
 
             <div class="scroll-wrapper" style="height: 98dvh">

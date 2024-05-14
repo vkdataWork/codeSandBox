@@ -4,11 +4,6 @@ import router from '@/Plugins/Router';
 import '@/Themes/generated/theme.additional.css';
 import i18n from '@/Plugins/I18n';
 import store from '@/Plugins/Store';
-import 'devextreme/dist/css/dx.common.css';
-import 'ace-builds/css/ace.css';
-import 'devexpress-richedit/dist/dx.richedit.css';
-import '@devexpress/analytics-core/dist/css/dx-analytics.common.css';
-import '@devexpress/analytics-core/dist/css/dx-querybuilder.css';
 import {baseAxios as axios} from '@/Plugins/Axios';
 import { AxiosError, AxiosResponse } from 'axios';
 import { setupWorker } from 'msw/browser'
@@ -41,5 +36,5 @@ const app = createApp(App);
 
 async function prepareApp() {  
      await worker.start();
-	
+	 console.log(worker.listHandlers())	
 }
