@@ -10,29 +10,30 @@ import { setupWorker } from 'msw/browser'
 import { handlers } from '@/Plugins/Mocks/Handlers';
 import { env } from '@/envProvider';
 
-export const worker = setupWorker(...handlers)
+export const worker = setupWorker(...handlers);
 const app = createApp(App);
 
-(async () => {	
-	app.use(store);
-	axios.defaults.baseURL = store.getters['AccountModule/urlWarehouseAPI'];
-	axios.interceptors.request.use(
-		(request)=>{
-			return request;
-		}
-	)
-	axios.interceptors.response.use(
-		(response: AxiosResponse) => {
-			return response;
-		},
-		(error: AxiosError) => {
-			return Promise.reject(error);
-		},
-	)
-	app.use(router);
-	app.use(i18n);
-	await prepareApp().then(()=>{app.mount('#app')});
+(async () => {
+    app.use(store);
+    axios.defaults.baseURL = env("WAREHOUSE_API_URL");
+    axios.interceptors.request.use((request) => {
+        return request;
+    });
+    axios.interceptors.response.use(
+        (response: AxiosResponse) => {
+            return response;
+        },
+        (error: AxiosError) => {
+            return Promise.reject(error);
+        }
+    );
+    app.use(router);
+    app.use(i18n);
+    await prepareApp().then(() => {
+        app.mount("#app");
+    });
 })();
+
 
 async function prepareApp() {  
      await worker.start();
