@@ -61,10 +61,8 @@
 import DxToolbar, { DxItem as DxItemToolbar } from 'devextreme-vue/toolbar';
 import { DxItem } from 'devextreme-vue/toolbar';
 import { ActionBarMenuType } from '@/Types/ActionBarMenuType';
-import { DisplayValueType } from '@/Types/DisplayValueType';
 import { PropType, computed, onMounted, onUpdated, ref, watch } from 'vue';
 import { IconClassEnum } from '@/Types/IconClassEnum';
-import { UploadEndpoints } from '@/Types/UploadEndpoints';
 import { useStore } from 'vuex';
 import { useI18n } from 'vue-i18n';
 
@@ -100,11 +98,6 @@ let props = defineProps({
     default: 'value',
     required: false,
   },
-  dataSource: {
-    type: Object as () => DisplayValueType<Object>[],
-    default: () => [],
-    required: false,
-  },
 
   intervalSource: {
     type: Array<Object>,
@@ -121,17 +114,7 @@ let props = defineProps({
     type: Number,
     default: 0,
     required: false,
-  },
-  uploadUrl: {
-    type: String as PropType<UploadEndpoints>,
-    default: '',
-    required: false,
-  },
-  uploadMode: {
-    type: String,
-    default: 'POST',
-    required: false,
-  },
+  }
 });
 let selectRenderKey = ref(0);
 let emits = defineEmits(['actionBarSearchEvent', 'actionBarIntervalEvent', 'actionBarEvent', 'twoRows', 'fileUploaded']);
@@ -144,10 +127,6 @@ onMounted(() => {
 onUpdated(() => {
   props.pageComments.length > 0 ? emits('twoRows', true) : emits('twoRows', false);
 });
-
-watch(() => props.dataSource, () => {
-  selectRenderKey.value++;
-}, { deep: true })
 
 </script>
 

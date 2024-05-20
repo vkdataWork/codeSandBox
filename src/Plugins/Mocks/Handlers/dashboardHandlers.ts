@@ -27,7 +27,7 @@ export const handlers = [
             "/api/dashboard/data/DashboardItemGetAction?dashboardId=1&itemId=gridDashboardItem2&query=%7B%22LimitVisibleData%22%3Atrue%7D"
         ),
         ({ request }) => {
-            return HttpResponse.json(dashboard.test_datovy_zdroju.gridItem2);
+            return HttpResponse.json(dashboard.test_datovych_zdroju.gridItem2);
         }
     ),
     http.get(
@@ -35,7 +35,7 @@ export const handlers = [
             "api/dashboard/data/DashboardItemGetAction?dashboardId=1&itemId=gridDashboardItem3&query=%7B%22LimitVisibleData%22%3Atrue%7D"
         ),
         ({ request }) => {
-            return HttpResponse.json(dashboard.test_datovy_zdroju.gridItem3);
+            return HttpResponse.json(dashboard.test_datovych_zdroju.gridItem3);
         }
     ),
     http.get(
@@ -43,7 +43,7 @@ export const handlers = [
             "/api/dashboard/data/DashboardItemGetAction?dashboardId=1&itemId=gridDashboardItem4&query=%7B%22LimitVisibleData%22%3Atrue%7D"
         ),
         ({ request }) => {
-            return HttpResponse.json(dashboard.test_datovy_zdroju.gridItem4);
+            return HttpResponse.json(dashboard.test_datovych_zdroju.gridItem4);
         }
     ),
     http.post(getUrl("/api/dashboard/data/PerformExportAction"), ({ request }) => {

@@ -8,7 +8,7 @@
 		"jsx": "preserve",
 		"resolveJsonModule": true,
 		"isolatedModules": true,
-		"types": ["vite/client", "vue", "node", "numeral"],
+		"types": ["vite/client", "node", "numeral"],
 		"typeRoots": ["./node_modules/@types/", "./types"],
 		"esModuleInterop": true,
 		"lib": ["ESNext", "DOM"],

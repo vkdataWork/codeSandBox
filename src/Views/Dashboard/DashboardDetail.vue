@@ -1,29 +1,16 @@
 <template>
     <div>
         <div :key="showGetDasboardStateButton">
-            <action-bar
-                v-if="actionBarMenu.getState != null"
-                :menuItems="actionBarMenu"
-                @actionBarEvent="handleActionBarEvent"
-            />
+            <action-bar v-if="actionBarMenu.getState != null" :menuItems="actionBarMenu"
+                @actionBarEvent="handleActionBarEvent" />
         </div>
     </div>
-    <DxDashboardControl
-        ref="dashboard"
-        class="responsive-paddings"
-        :endpoint="apiUrl"
-        style="height: 90dvh"
-        :workingMode="workingModeProp"
-        :dashboardId="selectedDashboard"
-        :loadDefaultDashboard="false"
-        limitVisibleDataMode="DesignerAndViewer"
-        :allowExecutingCustomSql="true"
-        :onBeforeRender="onBeforeRender"
-        :showConfirmationOnBrowserClosing="true"
-        :onDashboardInitialized="onDashboardInitialized"
+    <DxDashboardControl ref="dashboard" class="responsive-paddings" :endpoint="apiUrl" style="height: 90dvh"
+        :workingMode="workingModeProp" :dashboardId="selectedDashboard" :loadDefaultDashboard="false"
+        limitVisibleDataMode="DesignerAndViewer" :allowExecutingCustomSql="true" :onBeforeRender="onBeforeRender"
+        :showConfirmationOnBrowserClosing="true" :onDashboardInitialized="onDashboardInitialized"
         :onDashboardEndUpdate="(e: any) => onDashboardEndUpdate(e)"
-        :default-extensions="[DxExtensions.DataSourceWizard]"
-        :extensions="[
+        :default-extensions="[DxExtensions.DataSourceWizard]" :extensions="[
             DxExtensions.DataSourceWizard,
             DxExtensions.DashboardParameterDialog,
             DxExtensions.ItemOptionsPanel,
@@ -42,32 +29,23 @@
             DxExtensions.SimpleTableItemExtension,
             DxExtensions.WebPageItemExtension,
             DxExtensions.ExportDashboard,
-        ]"
-    >
+        ]">
         <DxExtensions :enableCustomSql="true">
             <DxChartIndicators />
             <DxDataInspector :allowInspectAggregatedData="true" :allowInspectRawData="true" />
-            <DxDashboardParameterDialog
-                :allowParameterEditing="true"
-                :allowParameterAdding="true"
-                :allowParameterDeleting="true"
-                :allowParameterTypes="[
+            <DxDashboardParameterDialog :allowParameterEditing="true" :allowParameterAdding="true"
+                :allowParameterDeleting="true" :allowParameterTypes="[
                     'System.String',
                     'System.DateTime',
                     'System.Int32',
                     'System.Int64',
                     'System.Double',
                     'System.Boolean',
-                ]"
-            />
-            <DxDataSourceWizard
-                :wizardSettings="{
-                    enableOlapDataSource: true,
-                    enableJsonDataSource: true,
-                }"
-                :enableCustomSql="true"
-                :allowCreateNewJsonConnection="true"
-            />
+                ]" />
+            <DxDataSourceWizard :wizardSettings="{
+                enableOlapDataSource: true,
+                enableJsonDataSource: true,
+            }" :enableCustomSql="true" :allowCreateNewJsonConnection="true" />
         </DxExtensions>
     </DxDashboardControl>
 </template>
@@ -84,7 +62,7 @@ import { DxDashboardControl } from "devexpress-dashboard-vue";
 import ActionBar from "@/Views/Commons/ActionBar.vue";
 import { ActionBarMenuType } from "@/Types/ActionBarMenuType";
 import DashboardEntity from "@/Types/Dashboard/DashboardEntity";
-import { computed, ref, onBeforeUnmount, onBeforeMount, onUnmounted } from "vue";
+import { computed, ref, onBeforeUnmount, onBeforeMount, onUnmounted, onMounted } from "vue";
 import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
@@ -154,19 +132,7 @@ let dashboardEntity = computed<DashboardEntity>(() => {
 });
 let registrationCount = ref<number>(0);
 
-onBeforeMount(async () => {
-    document
-        .getElementById("themeAnalytics")!
-        .setAttribute(
-            "href",
-            `${location.protocol}//${location.hostname}:${location.port}/css/analytics/dx-analytics.material.teal.dark.compact.min.css`
-        );
-    document
-        .getElementById("themeDashboard")!
-        .setAttribute(
-            "href",
-            `${location.protocol}//${location.hostname}:${location.port}/css/dashboard/dx-dashboard.material.teal.dark.compact.min.css`
-        );
+onBeforeMount(() => {
 
     workingModeProp.value =
         route.params.mode === "designer" || route.params.mode == "designercopy" ? "Designer" : "Viewer";
@@ -179,7 +145,7 @@ onBeforeMount(async () => {
         //selectedDashboard.value = '0';
         //getDashboardControl()!.selectedDashboard = '0';
     } else {
-        await store.dispatch("DashboardModule/fetchItem", Number(route.params.id)).then(() => {
+        store.dispatch("DashboardModule/fetchItem", Number(route.params.id)).then(() => {
             getDashboardControl()!.selectedDashboard = route.params.id;
             selectedDashboard.value = String(route.params.id);
         });
@@ -189,7 +155,7 @@ onBeforeMount(async () => {
 onBeforeUnmount(async () => {
     clearInterval(refreshInterval);
 });
-onUnmounted(async () => {});
+onUnmounted(async () => { });
 
 function onDashboardInitialized() {
     if (dashboardControl.value != undefined) {
@@ -201,33 +167,7 @@ function onDashboardInitialized() {
     }
 }
 
-async function isStateExist(): Promise<boolean> {
-    let selectedDashboard = route.params.id || "0";
-    await apiState
-        .get(apiStateUrl.value + "/state/" + selectedDashboard)
-        .then((e: any) => {
-            actionBarMenu = {
-                ...actionBarMenu,
-                getStateDisabled: e.data != "" ? false : true,
-                removeStateDisabled: e.data != "" ? false : true,
-            };
-
-            showGetDasboardStateButton.value++;
-            return e.data != "" ? false : true;
-        })
-        .catch((e: any) => {
-            console.log(e);
-            actionBarMenu = {
-                ...actionBarMenu,
-                getStateDisabled: true,
-            };
-            showGetDasboardStateButton.value++;
-        });
-
-    return false;
-}
-
-function onDashboardEndUpdate(e: any) {}
+function onDashboardEndUpdate(e: any) { }
 
 function getDashboardControl(): any {
     if (dashboard.value == null || dashboard.value == undefined) {
