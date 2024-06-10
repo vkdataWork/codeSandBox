@@ -47,14 +47,9 @@ export const handlers = [
         }
     ),
     http.post(getUrl("/api/dashboard/data/PerformExportAction"), ({ request }) => {
-        return getUrl(dashboard.test_datovych_zdroju.image);
-    }),
-    http.post(getUrl("/api/dashboard/data/PerformExportAction"), ({ request }) => {
-        return getUrl(dashboard.test_datovych_zdroju.image);
-    }),
-    http.post(getUrl("/api/dashboard/data/PerformExportAction"), ({ request }) => {
-        return getUrl(dashboard.test_datovych_zdroju.image);
-    }),
+        console.log("perform",request);
+        return HttpResponse.json(dashboard.test_datovych_zdroju.image);
+    })
 ];
 
 function getUrl(append: any): any {

@@ -7,21 +7,13 @@ import DashboardDetail from '@/Views/Dashboard/DashboardDetail.vue';
 export const Routes = [
 	{
 		name: RouteNames.Default,
-		path: '/:/id?/:env?/:prj?/:time?',
+		path: '/',
 		redirect: (to) => ({ name: RouteNames.DashboardDetail, params: {
             id: "1",
             mode: "viewer",
         }} ),
 		children: [],
-	} as RouteRecordRaw,
-
-	{
-		name: RouteNames.NotFound,
-		path: '/:catchAll(.*)',
-		redirect: (to) => ({ name: RouteNames.DashboardList, params: to.params }),
-		children: [],
-	} as RouteRecordRaw,
-	
+	} as RouteRecordRaw,	
 	{
 		name: RouteNames.DataWarehouseData,
 		path: '/data/:scheme/:table/:env?/:prj?/:time?',

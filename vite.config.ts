@@ -5,7 +5,7 @@ import sass from 'sass';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	server: {
+	server: {		
 		port: 8080,
 		cors: false,
 	},
