@@ -33,10 +33,10 @@
   dependencies:
     statuses "^2.0.1"
 
-"@devexpress/analytics-core@23.2.4":
-  version "23.2.4"
-  resolved "https://registry.yarnpkg.com/@devexpress/analytics-core/-/analytics-core-23.2.4.tgz#bb205271406274254b2baea8e1b3ac07017ead78"
-  integrity sha512-b3Bdg3VCkDt87+irHmCtqafWzAkSOxp0UCpago31/vHZjf1kf9H25ktY7RxsE0PsEryDPctCb0SQfirlDeqoTA==
+"@devexpress/analytics-core@24.1.6":
+  version "24.1.6"
+  resolved "https://registry.yarnpkg.com/@devexpress/analytics-core/-/analytics-core-24.1.6.tgz#0333fb339bad63fd5b0cb2d199cda3f55a588c11"
+  integrity sha512-dBbvgNLOY/ZvIKlvJRZ59imMxyF3+fgxPwj06gIz8WJki4o7rVxCQpuAEoJd4eaX6rWH3yhxa36FmBfXgoIx5w==
   dependencies:
     "@types/jquery" "^3.1.1"
     ace-builds "^1.4.13"
@@ -57,17 +57,17 @@
   dependencies:
     tslib "2.0.1"
 
-"@devexpress/utils@1.4.1":
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/@devexpress/utils/-/utils-1.4.1.tgz#71ad847ae3b95f57276e7fe6d879bde84dc7de66"
-  integrity sha512-wXixOorFlYsUiLOjAxb9UnTtvMXxYdsEmApKrbDmRk9M76V8evOQR2ChUzNtfPloy7fZecL8UWq/sF+3ZCPzQQ==
+"@devexpress/utils@^1.4.3":
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/@devexpress/utils/-/utils-1.4.3.tgz#346caf3328b2f5ce1814f187a56a1ed0ef69a4fc"
+  integrity sha512-UmmIwVRGQ6u6itE/zJ1xNmMuugXo/t1fWBtjROb7mhq2nY4ecDBdnRIqogKWAasGbMbhCxW9+ijkgRaNBVCIzQ==
   dependencies:
     tslib "2.3.1"
 
-"@devextreme/runtime@3.0.12":
-  version "3.0.12"
-  resolved "https://registry.yarnpkg.com/@devextreme/runtime/-/runtime-3.0.12.tgz#d453f360ead28490ad650d0ec30a6f4a78dce009"
-  integrity sha512-a2VCfi82xvB19E2UpaziHDwvbwJESfxm8KUoe1QzQeOFZ3tcgBnWh+oOhf2EIFLCTU34amG7AGVxrSDz+b+ZHg==
+"@devextreme/runtime@3.0.13":
+  version "3.0.13"
+  resolved "https://registry.yarnpkg.com/@devextreme/runtime/-/runtime-3.0.13.tgz#df6b28ea5659cbefcb3368bf8d118f775ec4f9ef"
+  integrity sha512-//24I6vo5a+XG/Ul3+vOGqU4M22IWyldpECxLY8iyGJWA5fiNaYzAedrMV2Ixo5oRj8DawiHTZKy5iKKF9ks5g==
   dependencies:
     inferno "^7.4.6"
     inferno-create-element "^7.4.6"
@@ -1391,26 +1391,26 @@ detect-node@^2.0.4:
   resolved "https://registry.yarnpkg.com/detect-node/-/detect-node-2.1.0.tgz#c9c70775a49c3d03bc2c06d9a73be550f978f8b1"
   integrity sha512-T0NIuQpnTvFDATNuHN5roPwSBG83rFsuO+MXXH9/3N1eFbn4wcPjttvjMLEPWJ0RGUYgQE7cGgS3tNxbqCGM7g==
 
-devexpress-dashboard-vue@23.2.4:
-  version "23.2.4"
-  resolved "https://registry.yarnpkg.com/devexpress-dashboard-vue/-/devexpress-dashboard-vue-23.2.4.tgz#c749af3264d89778d75b168d1a80d1dfb29bccc1"
-  integrity sha512-sMxSa5p15u6Enqqr4J207a4Luu1SsiBHznLqqmWDL9MvWNC/mwbGtMWEuZlJN/jBQRLNSt7mulr8JLUu8D59cg==
+devexpress-dashboard-vue@24.1.6:
+  version "24.1.6"
+  resolved "https://registry.yarnpkg.com/devexpress-dashboard-vue/-/devexpress-dashboard-vue-24.1.6.tgz#9c46fa6e3dfae2decd7e9f499055409c62d002ac"
+  integrity sha512-n2LbNyyPdCtVBuITcB7knBfIVASrzFeVRJ4Cq0o9t0GiB5BPteDy0wak4iCFkKEXyIozDZCHktSF3DdC5/0pLA==
 
-devexpress-dashboard@23.2.4:
-  version "23.2.4"
-  resolved "https://registry.yarnpkg.com/devexpress-dashboard/-/devexpress-dashboard-23.2.4.tgz#01e88deed91bb847c5fb97e19a611de7f6306c85"
-  integrity sha512-ox2uyVjkS1SsPPWiDjwQIyyMJCRpzcm+4fnUOJB49/FI8g8U/BkIKHDSMAojshY1ppTpIOv892LIDhbN/OEleA==
+devexpress-dashboard@24.1.6:
+  version "24.1.6"
+  resolved "https://registry.yarnpkg.com/devexpress-dashboard/-/devexpress-dashboard-24.1.6.tgz#40261b1b07e7f19f964a2706446045f2beeeb0b0"
+  integrity sha512-AtmOgZ5PSbX6nceDy9115M6jrR5nE8CbgelwrofoWvi04yIoGQuB/PDt42W0Tf14NErbcDaI5EMllc3yagpH0g==
   dependencies:
     "@types/jquery" "^3.1.1"
     jquery "^3.3.1"
     knockout "~3.5.0"
 
-devexpress-diagram@2.2.5:
-  version "2.2.5"
-  resolved "https://registry.yarnpkg.com/devexpress-diagram/-/devexpress-diagram-2.2.5.tgz#e1bcdb11328e65806463a74dca598dfbfea92ed2"
-  integrity sha512-gxcBYNChijcfmsOnWOWPmTGxIPn+eGIf3635PUgpTBL/WPpDVZJsXdEV+eXe92OEX0MopcyxiCSJZN5o3zZ4hQ==
+devexpress-diagram@2.2.10:
+  version "2.2.10"
+  resolved "https://registry.yarnpkg.com/devexpress-diagram/-/devexpress-diagram-2.2.10.tgz#66b67acc68895a3f7ddd9db2783c77950ec9b736"
+  integrity sha512-UkukX+bwAqA1wYTCtjytKItMP0Yn3bvbxN1gPV8Hd+cfv0AOdyPNJKNin2ZiMEM76REcRguuYbIEujRX0q6duA==
   dependencies:
-    "@devexpress/utils" "1.3.16"
+    "@devexpress/utils" "^1.4.3"
     es6-object-assign "^1.1.0"
 
 devexpress-diagram@^2.1.57:
@@ -1421,12 +1421,12 @@ devexpress-diagram@^2.1.57:
     "@devexpress/utils" "1.3.16"
     es6-object-assign "^1.1.0"
 
-devexpress-gantt@4.1.51:
-  version "4.1.51"
-  resolved "https://registry.yarnpkg.com/devexpress-gantt/-/devexpress-gantt-4.1.51.tgz#60711aee3d0de7258575ff30bde8c3335d6d78ca"
-  integrity sha512-sVCx7ffadSkXxvVasQDSka2VOnuu4WC08d/lq20zvr9EVMETggp2a3cTaymf9oIDDwuGugLOJdFVIz/3vWVfHw==
+devexpress-gantt@4.1.56:
+  version "4.1.56"
+  resolved "https://registry.yarnpkg.com/devexpress-gantt/-/devexpress-gantt-4.1.56.tgz#b762ab87d00673ec9f1bfe637cf2018403de9cea"
+  integrity sha512-jnnvDYDDzjqr8pnWYsAM96mug6yXEQ1H26QLLBRbwLC72ckb1yv0Rk6DUae9ZwewIFNzIKHt1klQMF/KD9Mb8A==
   dependencies:
-    "@devexpress/utils" "1.4.1"
+    "@devexpress/utils" "^1.4.3"
     tslib "2.3.1"
 
 devexpress-gantt@^3.0.20:
@@ -1437,12 +1437,12 @@ devexpress-gantt@^3.0.20:
     "@devexpress/utils" "1.3.14"
     tslib "2.3.1"
 
-devexpress-richedit@23.2.4:
-  version "23.2.4"
-  resolved "https://registry.yarnpkg.com/devexpress-richedit/-/devexpress-richedit-23.2.4.tgz#a4cae20166c229071fe0f6d67e70f7ab423bbc60"
-  integrity sha512-qSOjcnLklRu8giXurVpKXXVjPaSF6GC93L8sJF6J7M4qP0nBEC97oYj2g3VTwwj2E4oaZZxWAxopDetWnnvJuA==
+devexpress-richedit@24.1.6:
+  version "24.1.6"
+  resolved "https://registry.yarnpkg.com/devexpress-richedit/-/devexpress-richedit-24.1.6.tgz#2d7b1a3ba686e9cd97b8545240a114e8a77cf7ef"
+  integrity sha512-oHnd4mwW6D4Nf8RKWtaZDmT3pWVzlJATQs50IpwnFaHBUIIPXvCEjNe+PQXSQ8Vxl79jTctAPYuA1iGpQ14K1Q==
   dependencies:
-    "@devexpress/utils" "1.4.1"
+    "@devexpress/utils" "^1.4.3"
     jszip "~3.10.1"
     tslib "2.6.0"
 
@@ -1471,15 +1471,15 @@ devextreme-cli@^1.5.1:
     semver "^5.7.2"
     strip-bom "^4.0.0"
 
-devextreme-dist@23.2.4:
-  version "23.2.4"
-  resolved "https://registry.yarnpkg.com/devextreme-dist/-/devextreme-dist-23.2.4.tgz#956214e68de01771a958077bee1c62e0fad6ba3c"
-  integrity sha512-aLIycpgzIIZeo0kOFcrToJGlWlJtddzLznLASfFDQUnAXjV2QAtEQfPjb0zfNFI27koHvpPQ015kZyiwG8tNWA==
+devextreme-dist@24.1.6:
+  version "24.1.6"
+  resolved "https://registry.yarnpkg.com/devextreme-dist/-/devextreme-dist-24.1.6.tgz#96f69ec783281c8c0fbd51107e756d18df6bf320"
+  integrity sha512-7ORCvc+IpIE9Q63AT9+0RS2bEwkqPR3Zyb6eNXpJiEPBjAbg3O6BQklrl0ogNJFwRGrfwqfGW6r9yM6QtYtykw==
 
-devextreme-quill@1.6.4:
-  version "1.6.4"
-  resolved "https://registry.yarnpkg.com/devextreme-quill/-/devextreme-quill-1.6.4.tgz#bb2735d122c2e594ca48671e112bb3f8210616f6"
-  integrity sha512-qs8lt+nn/2vQX1PrImQmCj2B1c8ydD5Hrjn42wWeqa4sVFd/9e2UM+PL979EtKqX0k1M4ncMe25cSbgYz5nNdA==
+devextreme-quill@1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/devextreme-quill/-/devextreme-quill-1.7.1.tgz#382fe8ee942f687ef0210b1c08eee9c5da6bd19c"
+  integrity sha512-0smNE/Br+m9gQDxSPaJxwmrX5ZFubnBHWdbBtY8p6L3ATrF00mFqNQIflVi1tUAr8ndYeHY6Oih46Z1EWDGSQA==
   dependencies:
     core-js "^3.34.0"
     eventemitter3 "^4.0.7"
@@ -1489,17 +1489,10 @@ devextreme-quill@1.6.4:
     parchment "^2.0.1"
     quill-delta "^5.0.0"
 
-devextreme-showdown@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/devextreme-showdown/-/devextreme-showdown-1.0.1.tgz#210485fc37334bcef5da7fb665513fc6de599dbe"
-  integrity sha512-63zsdU3iGDp0E9TibxGwZPlS+l07/VvD/mlgZY30fEqz6J2kCsYCqyNKbhlgIvuz+yMtWcUXVYVOMpA2YBTgEg==
-  dependencies:
-    yargs "^17.2.1"
-
-devextreme-themebuilder@23.2.4:
-  version "23.2.4"
-  resolved "https://registry.yarnpkg.com/devextreme-themebuilder/-/devextreme-themebuilder-23.2.4.tgz#aee59ec609090040a8df4751549f4d57860fd474"
-  integrity sha512-hNXQueWL80xuWTudrXFFB5elQerK82swrf+dX3zCdniqC+YysIHoSZ6bGMDseQv/0dhWxg1LgTCxi4b5ln+R+w==
+devextreme-themebuilder@24.1.6:
+  version "24.1.6"
+  resolved "https://registry.yarnpkg.com/devextreme-themebuilder/-/devextreme-themebuilder-24.1.6.tgz#8656ae698a554626dfa58e48b24362683a9ffad2"
+  integrity sha512-ufuG78UN0qOfa4xvM4aw/DV8+4jbF3X4AJPT2tkXLge/d8FQFYReQeDLV1kdAO/oHj5cdXzrYIglcaF0xyuNSQ==
   dependencies:
     autoprefixer "^10.4.7"
     bootstrap4 "npm:bootstrap@^4.6.0"
@@ -1509,26 +1502,26 @@ devextreme-themebuilder@23.2.4:
     postcss "^8.2.6"
     sass-embedded "1.66.0"
 
-devextreme-vue@23.2.4:
-  version "23.2.4"
-  resolved "https://registry.yarnpkg.com/devextreme-vue/-/devextreme-vue-23.2.4.tgz#8fc101ea44108bd90ae61890af1a1e3938a6aced"
-  integrity sha512-DDLDy1eP01g6vN/snuPzEKmEOIBXGK7Km9OFn2YgzjdM1R4+KT3OXkH30ySra/wcG7WJFqUtNDJHy/rjUiWs6Q==
+devextreme-vue@24.1.6:
+  version "24.1.6"
+  resolved "https://registry.yarnpkg.com/devextreme-vue/-/devextreme-vue-24.1.6.tgz#6fdac450608cc2a6ab1a8af96e85a9bec3f8e827"
+  integrity sha512-mFJIkuMLSa+GaPpH8LQCffLtf1IpvWBkmzWr5fWoDc+9h7wUiwd+EA1mFsoYL9sGsrwDDj5yDNKKG06gJzuc4g==
 
-devextreme@23.2.4:
-  version "23.2.4"
-  resolved "https://registry.yarnpkg.com/devextreme/-/devextreme-23.2.4.tgz#0fb64994689fb0334638a3d3d6383c5db5cf7bb7"
-  integrity sha512-peMoEZGjELomWO1zWzn25uJEpC+4csntleJuIFno4/TbhBISXa1rm28dZt5pGKh+RnOhKy1A/wABpRJiC8stew==
+devextreme@24.1.6:
+  version "24.1.6"
+  resolved "https://registry.yarnpkg.com/devextreme/-/devextreme-24.1.6.tgz#f9af10fc9f08727e1564ba187d728ef0d7b18faf"
+  integrity sha512-O6K5MLqUx1AJUSbA6XMnCvS23cPH1g1UMtdb/Dw7XSmZWSISRcnfHHou7TX48mxch521Nz0QcHPnOY+cVtn9+g==
   dependencies:
     "@babel/runtime" "^7.12.1"
-    "@devextreme/runtime" "3.0.12"
-    devexpress-diagram "2.2.5"
-    devexpress-gantt "4.1.51"
-    devextreme-quill "1.6.4"
-    devextreme-showdown "^1.0.1"
+    "@devextreme/runtime" "3.0.13"
+    devexpress-diagram "2.2.10"
+    devexpress-gantt "4.1.56"
+    devextreme-quill "1.7.1"
     inferno "^7.4.9"
     inferno-hydrate "^7.4.9"
-    jszip "^3.7.1"
+    jszip "^3.10.1"
     rrule "^2.7.1"
+    showdown "^2.1.0"
     turndown "~7.1.0"
 
 dezalgo@^1.0.0:
@@ -2410,7 +2403,7 @@ jsonlint@^1.6.3:
     JSV "^4.0.x"
     nomnom "^1.5.x"
 
-jszip@^3.10.1, jszip@^3.7.1, jszip@~3.10.1:
+jszip@^3.10.1, jszip@~3.10.1:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/jszip/-/jszip-3.10.1.tgz#34aee70eb18ea1faec2f589208a157d1feb091c2"
   integrity sha512-xXDvecyTpGLrqFrvkrUSoxxfJI5AH7U8zxxtVclpsUtMCq4JQ290LY8AW5c7Ggnr/Y/oK+bQMbqK2qmtk3pN4g==
@@ -4026,7 +4019,7 @@ yargs-parser@^21.1.1:
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-21.1.1.tgz#9096bceebf990d21bb31fa9516e0ede294a77d35"
   integrity sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==
 
-yargs@^17.2.1, yargs@^17.7.2:
+yargs@^17.7.2:
   version "17.7.2"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-17.7.2.tgz#991df39aca675a192b816e1e0363f9d75d2aa269"
   integrity sha512-7dSzzRQ++CKnNI/krKnYRV7JKKPUXMEh61soaHKg9mrWEhzFWhFnxPxGl+69cD1Ou63C13NUPCnmIcrvqCuM6w==
