@@ -86,9 +86,9 @@ import { SchedulerExtension } from "@/Views/Components/Dashboard/extensions/sche
 import { RouteNames } from "@/Plugins/Router/RouteNames";
 import axios, { AxiosResponse } from "axios";
 
+const theme = ref("material.blue.dark");
 const store = useStore();
 const route = useRoute();
-const router = useRouter();
 const { t } = useI18n();
 const apiState = axios.create({
     baseURL: store.getters["AccountModule/urlWarehouseAPI"],
@@ -96,14 +96,12 @@ const apiState = axios.create({
         "Content-Type": "application/json",
     },
 });
-let refreshInterval;
 apiState.interceptors.request.use(
     (config) => {
         config.baseURL = store.getters["AccountModule/urlWarehouseAPI"];
         return config;
     },
     (error) => {
-        // router.push({ name: RouteNames.Login });
         console.log("interceptor error axios data", error);
         return Promise.reject(error);
     }
@@ -127,9 +125,6 @@ const currentEnvironment = ref<number>(1);
 const pageTitle = ref<string>(workingModeProp.value === "Designer" ? "Designer mode" : "Viewer mode");
 const dashboard = ref(null);
 let dashboardControl = ref<any>();
-let dashboardEntity = computed<DashboardEntity>(() => {
-    return store.getters["DashboardModule/item"]();
-});
 let registrationCount = ref<number>(0);
 
 onBeforeMount(() => {
@@ -150,10 +145,16 @@ onBeforeMount(() => {
             selectedDashboard.value = String(route.params.id);
         });
     }
+    document
+        .getElementById('themeAnalytics')!
+        .setAttribute('href', `${location.protocol}//${location.hostname}:${location.port}/css/analytics/dx-analytics.${theme.value}.css`);
+    document
+        .getElementById('themeDashboard')!
+        .setAttribute('href', `${location.protocol}//${location.hostname}:${location.port}/css/dashboard/dx-dashboard.${theme.value}.min.css`);
 });
 
 onBeforeUnmount(async () => {
-    clearInterval(refreshInterval);
+
 });
 onUnmounted(async () => { });
 

@@ -9,12 +9,16 @@ export const Routes = [
         name: RouteNames.Default,
         path: "/",
         redirect: (to) => ({
-            name: RouteNames.DataWarehouseData,
+            name: RouteNames.DashboardDetail,
             params: {
-                scheme: "DWHstage",
-                table: "test_data_types",
+                id: 1,
+                mode: "viewer",
             },
         }),
+        /*redirect: (to) => ({ name: RouteNames.DataWarehouseData,params:{
+            scheme:'DWHstage',
+            table:'test_data_types'
+        }}),*/
         children: [],
     } as RouteRecordRaw,
     {
@@ -25,7 +29,7 @@ export const Routes = [
             title: "Table data",
             section: RouteNames.Default,
             layout: NoLayout,
-            parent: RouteNames.DataWarehouseData,
+            parent: RouteNames.DataWarehouse,
             help: "",
         },
         component: WareHouseData,
@@ -38,8 +42,8 @@ export const Routes = [
             title: "Edit Dashboard",
             section: RouteNames.Default,
             layout: NoLayout,
-            parent: RouteNames.DashboardDetail,
-            help: "",
+            parent: RouteNames.DashboardList,
+            help: "edit-dashboard",
         },
         component: DashboardDetail,
     } as RouteRecordRaw,

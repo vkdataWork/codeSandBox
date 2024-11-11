@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Waiting...</title>
+    </head>
+    <body>
+        <script src="js/oidc-client.min.js"></script>
+        <script>
+            var mgr = new Oidc.UserManager({
+                response_mode: "query",
+                userStore: new Oidc.WebStorageStateStore(),
+                loadUserInfo: true,
+                filterProtocolClaims: true,
+            })
+                .signinRedirectCallback()
+                .then(function (user) {
+                    console.log("signin response success", user);
+                    window.location.href = "../";
+                })
+                .catch(function (err) {
+                    console.log("callback.html: ", err);
+                });
+        </script>
+    </body>
+</html>
