@@ -85,8 +85,9 @@ import { FunnelD3ItemExtension } from "@/Views/Components/Dashboard/extensions/f
 import { SchedulerExtension } from "@/Views/Components/Dashboard/extensions/scheduler-item/scheduler-item";
 import { RouteNames } from "@/Plugins/Router/RouteNames";
 import axios, { AxiosResponse } from "axios";
+import { currentTheme } from 'devextreme/viz/themes';
 
-const theme = ref("material.blue.dark");
+const theme = computed(() => currentTheme())
 const store = useStore();
 const route = useRoute();
 const { t } = useI18n();
@@ -128,7 +129,6 @@ let dashboardControl = ref<any>();
 let registrationCount = ref<number>(0);
 
 onBeforeMount(() => {
-
     workingModeProp.value =
         route.params.mode === "designer" || route.params.mode == "designercopy" ? "Designer" : "Viewer";
     pageTitle.value = ` ${workingModeProp.value === "Designer" ? "Designer mode" : "Viewer mode"}`;
